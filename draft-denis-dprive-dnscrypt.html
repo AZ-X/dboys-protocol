@@ -1416,13 +1416,13 @@ DNSCrypt Clients and resolvers should support the protocol over UDP and must sup
 variable number of NUL bytes.<a href="#section-9-1" class="pilcrow">¶</a></p>
 <p id="section-9-2">The length of <code>&lt;client-query-pad&gt;</code> is randomly chosen between 1 and 256 bytes (including the leading 0x80), but the total length of <code>&lt;client-query&gt;</code> <code>&lt;client-query-pad&gt;</code> must be a multiple of 64 bytes.<a href="#section-9-2" class="pilcrow">¶</a></p>
 <p id="section-9-3">For example, an originally unpadded 56-bytes DNS query can be padded as:<a href="#section-9-3" class="pilcrow">¶</a></p>
-<p id="section-9-4"><code>&lt;56-bytes-query&gt; 0x80 0x00 0x00 0x00 0x00 0x00 0x00 0x00</code>
-or
-<code>&lt;56-bytes-query&gt; 0x80 (0x00 * 71)</code>
-or
-<code>&lt;56-bytes-query&gt; 0x80 (0x00 * 135)</code>
-or
-<code>&lt;56-bytes-query&gt; 0x80 (0x00 * 199)</code><a href="#section-9-4" class="pilcrow">¶</a></p>
+<p id="section-9-4"><code>&lt;56-bytes-query&gt; 0x80 0x00 0x00 0x00 0x00 0x00 0x00 0x00</code><a href="#section-9-4" class="pilcrow">¶</a></p>
+<p id="section-9-5">or<a href="#section-9-5" class="pilcrow">¶</a></p>
+<p id="section-9-6"><code>&lt;56-bytes-query&gt; 0x80 (0x00 * 71)</code><a href="#section-9-6" class="pilcrow">¶</a></p>
+<p id="section-9-7">or<a href="#section-9-7" class="pilcrow">¶</a></p>
+<p id="section-9-8"><code>&lt;56-bytes-query&gt; 0x80 (0x00 * 135)</code><a href="#section-9-8" class="pilcrow">¶</a></p>
+<p id="section-9-9">or<a href="#section-9-9" class="pilcrow">¶</a></p>
+<p id="section-9-10"><code>&lt;56-bytes-query&gt; 0x80 (0x00 * 199)</code><a href="#section-9-10" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="client-queries-over-tcp">
