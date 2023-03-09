@@ -1224,7 +1224,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">The document defines a specific protocol, DNSCrypt, that encrypts and authenticates DNS [@!RFC1035] queries and responses, improving confidentiality, integrity, and resistance to attacks affecting the original DNS protocol.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">The document defines a specific protocol, DNSCrypt, that encrypts and authenticates DNS <span>[<a href="#RFC1035" class="cite xref">RFC1035</a>]</span> queries and responses, improving confidentiality, integrity, and resistance to attacks affecting the original DNS protocol.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">The protocol is designed to be lightweight, extensible, and simple to implement securely on top of an existing DNS client, server or proxy.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">DNS packets don't need to be parsed nor rewritten. DNSCrypt simply wraps them in a secure, encrypted container. Encrypted packets are then exchanged the same way as regular packets, using the standard DNS transport mechanisms. Queries and responses are sent over UDP, falling back to TCP for large responses only if necessary.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">DNSCrypt is stateless. Every query can be processed independently from other queries. There are no session identifiers. Clients can replace their keys whenever they want, without extra interactions with servers.<a href="#section-1-4" class="pilcrow">¶</a></p>
@@ -1747,6 +1747,10 @@ numbers little-endian):<a href="#section-16.1-3" class="pilcrow">¶</a></p>
 <a href="#section-17" class="section-number selfRef">17. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
       </h2>
 <dl class="references">
+<dt id="RFC1035">[RFC1035]</dt>
+      <dd>
+<span class="refAuthor">Mockapetris, P.</span>, <span class="refTitle">"Domain names - implementation and specification"</span>, <span class="seriesInfo">STD 13</span>, <span class="seriesInfo">RFC 1035</span>, <span class="seriesInfo">DOI 10.17487/RFC1035</span>, <time datetime="1987-11" class="refDate">November 1987</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc1035">https://www.rfc-editor.org/info/rfc1035</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
       <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
