@@ -549,7 +549,7 @@ Table of Contents
    public key.  In particular, an anonymous client can generate a new
    key pair for every session, or even for every query.
 
-   his mitigates the ability for a resolver to group queries by client
+   This mitigates the ability for a resolver to group queries by client
    public keys, and discover the set of IP addresses a user might have
    been operating.
 
