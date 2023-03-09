@@ -529,17 +529,18 @@ Table of Contents
 
    Resolvers accepting queries from any client must accept any client
    public key.  In particular, an anonymous client can generate a new
-   key pair for every session, or even for every query.  This mitigates
-   the ability for a resolver to group queries by client public keys,
-   and discover the set of IP addresses a user might have been
-   operating.
+   key pair for every session, or even for every query.
+
+   his mitigates the ability for a resolver to group queries by client
+   public keys, and discover the set of IP addresses a user might have
+   been operating.
 
    Resolvers must rotate the short-term key pair every 24 hours at most,
    and must throw away the previous secret key.
 
    During a key rotation, and provided that the old key hasn't been
-   compromised, a resolver should accept both the old and the new key
-   for at least 4 hours, and public them as different certificates.
+   compromised, a resolver should accept all valid keys for at least 4
+   hours, and handle them as different certificates.
 
    Provider public keys may be published as a DNSSEC-signed TXT records,
    in the same zone as the provider name.

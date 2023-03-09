@@ -1372,15 +1372,9 @@ DNSCrypt Clients and resolvers should support the protocol over UDP and must sup
       <h2 id="name-padding-for-client-queries-">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-padding-for-client-queries-" class="section-name selfRef">Padding for client queries over UDP</a>
       </h2>
-<p id="section-7-1">Prior to encryption, queries are padded using the ISO/IEC 7816-4
-format. The padding starts with a byte valued 0x80 followed by a
-variable number of NUL bytes.<a href="#section-7-1" class="pilcrow">¶</a></p>
-<p id="section-7-2"><code>&lt;client-query&gt;</code> <code>&lt;client-query-pad&gt;</code> must be at least <code>&lt;min-query-len&gt;</code>
-bytes. If the length of the client query is less than <code>&lt;min-query-len&gt;</code>,
-the padding length must be adjusted in order to satisfy this
-requirement.<a href="#section-7-2" class="pilcrow">¶</a></p>
-<p id="section-7-3"><code>&lt;min-query-len&gt;</code> is a variable length, initially set to 256 bytes, and
-must be a multiple of 64 bytes.<a href="#section-7-3" class="pilcrow">¶</a></p>
+<p id="section-7-1">Prior to encryption, queries are padded using the ISO/IEC 7816-4 format. The padding starts with a byte valued 0x80 followed by a variable number of NUL bytes.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2"><code>&lt;client-query&gt;</code> <code>&lt;client-query-pad&gt;</code> must be at least <code>&lt;min-query-len&gt;</code> bytes. If the length of the client query is less than <code>&lt;min-query-len&gt;</code>, the padding length must be adjusted in order to satisfy this requirement.<a href="#section-7-2" class="pilcrow">¶</a></p>
+<p id="section-7-3"><code>&lt;min-query-len&gt;</code> is a variable length, initially set to 256 bytes, and must be a multiple of 64 bytes.<a href="#section-7-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="client-queries-over-udp">
@@ -1389,23 +1383,16 @@ must be a multiple of 64 bytes.<a href="#section-7-3" class="pilcrow">¶</a></p>
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-client-queries-over-udp" class="section-name selfRef">Client queries over UDP</a>
       </h2>
 <p id="section-8-1">Client queries sent using UDP must be padded as described in section 3.<a href="#section-8-1" class="pilcrow">¶</a></p>
-<p id="section-8-2">A UDP packet can contain a single query, whose entire content is
-the <code>&lt;dnscrypt-query&gt;</code> construction documented in section 2.<a href="#section-8-2" class="pilcrow">¶</a></p>
-<p id="section-8-3">UDP packets using the DNSCrypt protocol can be fragmented into
-multiple IP packets and can use a single source port.<a href="#section-8-3" class="pilcrow">¶</a></p>
-<p id="section-8-4">After having received a query, the resolver can either ignore the query
-or reply with a DNSCrypt-encapsulated response.<a href="#section-8-4" class="pilcrow">¶</a></p>
-<p id="section-8-5">The client must verify and decrypt the response using the resolver's
-public key, the shared secret and the received nonce. If the response
-cannot be verified, the response must be discarded.<a href="#section-8-5" class="pilcrow">¶</a></p>
+<p id="section-8-2">A UDP packet can contain a single query, whose entire content is the <code>&lt;dnscrypt-query&gt;</code> construction documented in section 2.<a href="#section-8-2" class="pilcrow">¶</a></p>
+<p id="section-8-3">UDP packets using the DNSCrypt protocol can be fragmented into multiple IP packets and can use a single source port.<a href="#section-8-3" class="pilcrow">¶</a></p>
+<p id="section-8-4">After having received a query, the resolver can either ignore the query or reply with a DNSCrypt-encapsulated response.<a href="#section-8-4" class="pilcrow">¶</a></p>
+<p id="section-8-5">The client must verify and decrypt the response using the resolver's public key, the shared secret and the received nonce. If the response cannot be verified, the response must be discarded.<a href="#section-8-5" class="pilcrow">¶</a></p>
 <p id="section-8-6">If the response has the TC flag set, the client must:<a href="#section-8-6" class="pilcrow">¶</a></p>
 <p id="section-8-7">1) send the query again using TCP
 2) set the new minimum query length as:<a href="#section-8-7" class="pilcrow">¶</a></p>
 <p id="section-8-8"><code>&lt;min-query-len&gt; ::= min(&lt;min-query-len&gt; + 64, &lt;max-query-len&gt;)</code><a href="#section-8-8" class="pilcrow">¶</a></p>
-<p id="section-8-9"><code>&lt;min-query-len&gt;</code> must be capped so that the full length of a DNSCrypt
-packet doesn't exceed the maximum size required by the transport layer.<a href="#section-8-9" class="pilcrow">¶</a></p>
-<p id="section-8-10">The client may decrease <code>&lt;min-query-len&gt;</code>, but the length must remain a multiple
-of 64 bytes.<a href="#section-8-10" class="pilcrow">¶</a></p>
+<p id="section-8-9"><code>&lt;min-query-len&gt;</code> must be capped so that the full length of a DNSCrypt packet doesn't exceed the maximum size required by the transport layer.<a href="#section-8-9" class="pilcrow">¶</a></p>
+<p id="section-8-10">The client may decrease <code>&lt;min-query-len&gt;</code>, but the length must remain a multiple of 64 bytes.<a href="#section-8-10" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="padding-for-client-queries-over-tcp">
@@ -1413,12 +1400,9 @@ of 64 bytes.<a href="#section-8-10" class="pilcrow">¶</a></p>
       <h2 id="name-padding-for-client-queries-o">
 <a href="#section-9" class="section-number selfRef">9. </a><a href="#name-padding-for-client-queries-o" class="section-name selfRef">Padding for client queries over TCP</a>
       </h2>
-<p id="section-9-1">Prior to encryption, queries are padded using the ISO/IEC 7816-4
-format. The padding starts with a byte valued 0x80 followed by a
+<p id="section-9-1">Prior to encryption, queries are padded using the ISO/IEC 7816-4 format. The padding starts with a byte valued 0x80 followed by a
 variable number of NUL bytes.<a href="#section-9-1" class="pilcrow">¶</a></p>
-<p id="section-9-2">The length of <code>&lt;client-query-pad&gt;</code> is randomly chosen between 1 and 256
-bytes (including the leading 0x80), but the total length of <code>&lt;client-query&gt;</code>
-        <code>&lt;client-query-pad&gt;</code> must be a multiple of 64 bytes.<a href="#section-9-2" class="pilcrow">¶</a></p>
+<p id="section-9-2">The length of <code>&lt;client-query-pad&gt;</code> is randomly chosen between 1 and 256 bytes (including the leading 0x80), but the total length of <code>&lt;client-query&gt;</code> <code>&lt;client-query-pad&gt;</code> must be a multiple of 64 bytes.<a href="#section-9-2" class="pilcrow">¶</a></p>
 <p id="section-9-3">For example, an originally unpadded 56-bytes DNS query can be padded as:<a href="#section-9-3" class="pilcrow">¶</a></p>
 <p id="section-9-4"><code>&lt;56-bytes-query&gt; 0x80 0x00 0x00 0x00 0x00 0x00 0x00 0x00</code>
 or
@@ -1449,13 +1433,10 @@ or
 <p id="section-11-2">The construction, originally implemented in the libsodium cryptographic library and exposed under the name "crypto_box_curve25519xchacha20poly1305", uses the Curve25119 elliptic curve in Montgomery form and the <code>hchacha20</code> hash function for key exchange, the <code>XChaCha20</code> stream cipher, and <code>Poly1305</code> for message authentication.<a href="#section-11-2" class="pilcrow">¶</a></p>
 <p id="section-11-3">The public and secret keys are 32 bytes long in storage. The MAC is 16 bytes long, and is prepended to the ciphertext.<a href="#section-11-3" class="pilcrow">¶</a></p>
 <p id="section-11-4">When using <code>Box-XChaChaPoly</code>, this construction requires a 24 bytes nonce, that must not be reused for a given shared secret.<a href="#section-11-4" class="pilcrow">¶</a></p>
-<p id="section-11-5">With a 24 bytes nonce, a question sent by a DNSCrypt client must be encrypted using the shared secret, and a nonce constructed as follows:
-12 bytes chosen by the client followed by 12 NUL (<code>0x00</code>) bytes.<a href="#section-11-5" class="pilcrow">¶</a></p>
-<p id="section-11-6">A response to this question must be encrypted using the shared secret, and a nonce constructed as follows: the bytes originally chosen by
-the client, followed by bytes chosen by the resolver.<a href="#section-11-6" class="pilcrow">¶</a></p>
+<p id="section-11-5">With a 24 bytes nonce, a question sent by a DNSCrypt client must be encrypted using the shared secret, and a nonce constructed as follows: 12 bytes chosen by the client followed by 12 NUL (<code>0x00</code>) bytes.<a href="#section-11-5" class="pilcrow">¶</a></p>
+<p id="section-11-6">A response to this question must be encrypted using the shared secret, and a nonce constructed as follows: the bytes originally chosen by the client, followed by bytes chosen by the resolver.<a href="#section-11-6" class="pilcrow">¶</a></p>
 <p id="section-11-7">The resolver's half of the nonce should be randomly chosen.<a href="#section-11-7" class="pilcrow">¶</a></p>
-<p id="section-11-8">The client's half of the nonce can include a timestamp in addition to a counter or to random bytes, so that when a response is received, the
-client can use this timestamp to immediately discard responses to queries that have been sent too long ago, or dated in the future.<a href="#section-11-8" class="pilcrow">¶</a></p>
+<p id="section-11-8">The client's half of the nonce can include a timestamp in addition to a counter or to random bytes, so that when a response is received, the client can use this timestamp to immediately discard responses to queries that have been sent too long ago, or dated in the future.<a href="#section-11-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="certificates">
@@ -1463,23 +1444,17 @@ client can use this timestamp to immediately discard responses to queries that h
       <h2 id="name-certificates">
 <a href="#section-12" class="section-number selfRef">12. </a><a href="#name-certificates" class="section-name selfRef">Certificates</a>
       </h2>
-<p id="section-12-1">The client begins a DNSCrypt session by sending a regular unencrypted
-TXT DNS query to the resolver IP address, on the DNSCrypt port, first
-over UDP, then, in case of failure, timeout or truncation, over TCP.<a href="#section-12-1" class="pilcrow">¶</a></p>
+<p id="section-12-1">The client begins a DNSCrypt session by sending a regular unencrypted TXT DNS query to the resolver IP address, on the DNSCrypt port, first over UDP, then, in case of failure, timeout or truncation, over TCP.<a href="#section-12-1" class="pilcrow">¶</a></p>
 <p id="section-12-2">Resolvers are not required to serve certificates both on UDP and TCP.<a href="#section-12-2" class="pilcrow">¶</a></p>
 <p id="section-12-3">The name in the question (<code>&lt;provider name</code>) must follow this scheme:<a href="#section-12-3" class="pilcrow">¶</a></p>
 <p id="section-12-4"><code>&lt;protocol-major-version&gt; . dnscrypt-cert . &lt;zone&gt;</code><a href="#section-12-4" class="pilcrow">¶</a></p>
 <p id="section-12-5">A major protocol version has only one certificate format.<a href="#section-12-5" class="pilcrow">¶</a></p>
-<p id="section-12-6">A DNSCrypt client implementing the second version of the protocol must
-send a query with the TXT type and a name of the form:<a href="#section-12-6" class="pilcrow">¶</a></p>
+<p id="section-12-6">A DNSCrypt client implementing the second version of the protocol must send a query with the TXT type and a name of the form:<a href="#section-12-6" class="pilcrow">¶</a></p>
 <p id="section-12-7"><code>2.dnscrypt-cert.example.com</code><a href="#section-12-7" class="pilcrow">¶</a></p>
-<p id="section-12-8">The zone must be a valid DNS name, but may not be registered in the DNS
-hierarchy.<a href="#section-12-8" class="pilcrow">¶</a></p>
-<p id="section-12-9">A single provider name can be shared by multiple resolvers operated by
-the same entity, and a resolver can respond to multiple provider
+<p id="section-12-8">The zone must be a valid DNS name, but may not be registered in the DNS hierarchy.<a href="#section-12-8" class="pilcrow">¶</a></p>
+<p id="section-12-9">A single provider name can be shared by multiple resolvers operated by the same entity, and a resolver can respond to multiple provider
 names, especially to support multiple protocol versions simultaneously.<a href="#section-12-9" class="pilcrow">¶</a></p>
-<p id="section-12-10">In order to use a DNSCrypt-enabled resolver, a client must know the
-following information:<a href="#section-12-10" class="pilcrow">¶</a></p>
+<p id="section-12-10">In order to use a DNSCrypt-enabled resolver, a client must know the following information:<a href="#section-12-10" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-12-11.1">The resolver IP address and port<a href="#section-12-11.1" class="pilcrow">¶</a>
 </li>
@@ -1488,19 +1463,13 @@ following information:<a href="#section-12-10" class="pilcrow">¶</a></p>
         <li class="normal" id="section-12-11.3">The provider public key<a href="#section-12-11.3" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="section-12-12">The provider public key is a long-term key whose sole purpose is to
-verify the certificates. It is never used to encrypt or verify DNS queries.
-A unique provider public key can be used to sign multiple certificates.<a href="#section-12-12" class="pilcrow">¶</a></p>
-<p id="section-12-13">For example, an organization operating multiple resolvers can use
-a unique provider name and provider public key across all resolvers,
-and just provide a list of IP addresses and ports. Each resolver may
-have its unique set of certificates that can be signed with the
+<p id="section-12-12">The provider public key is a long-term key whose sole purpose is to verify the certificates. It is never used to encrypt or verify DNS queries. A unique provider public key can be used to sign multiple certificates.<a href="#section-12-12" class="pilcrow">¶</a></p>
+<p id="section-12-13">For example, an organization operating multiple resolvers can use a unique provider name and provider public key across all resolvers,
+and just provide a list of IP addresses and ports. Each resolver may have its unique set of certificates that can be signed with the
 same key.<a href="#section-12-13" class="pilcrow">¶</a></p>
-<p id="section-12-14">Certificates should be signed on dedicated hardware and not on the
-resolvers. Resolvers must serve the certificates, provided that they
+<p id="section-12-14">Certificates should be signed on dedicated hardware and not on the resolvers. Resolvers must serve the certificates, provided that they
 have already been signed.<a href="#section-12-14" class="pilcrow">¶</a></p>
-<p id="section-12-15">A successful response to certificate request contains one or more TXT
-records, each record containing a certificate encoded as follows:<a href="#section-12-15" class="pilcrow">¶</a></p>
+<p id="section-12-15">A successful response to certificate request contains one or more <code>TXT</code> records, each record containing a certificate encoded as follows:<a href="#section-12-15" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-12-16.1">
           <code>&lt;cert&gt;</code>: <code>&lt;cert-magic&gt; &lt;es-version&gt; &lt;protocol-minor-version&gt; &lt;signature&gt; &lt;resolver-pk&gt; &lt;client-magic&gt; &lt;serial&gt; &lt;ts-start&gt; &lt;ts-end&gt; &lt;extensions&gt;</code><a href="#section-12-16.1" class="pilcrow">¶</a>
@@ -1547,26 +1516,19 @@ big-endian 4-byte unsigned Unix timestamp.<a href="#section-12-18.8" class="pilc
           <code>&lt;extensions&gt;</code>: empty in the current protocol version, but may contain additional data in future revisions, including minor versions. The computation and the verification of the signature must include the extensions. An implementation not supporting these extensions must ignore them.<a href="#section-12-18.9" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="section-12-19">Certificates made of these information, without extensions, are 116 bytes
-long. With the addition of the cert-magic, es-version and
+<p id="section-12-19">Certificates made of these information, without extensions, are 116 bytes long. With the addition of the cert-magic, es-version and
 protocol-minor-version, the record is 124 bytes long.<a href="#section-12-19" class="pilcrow">¶</a></p>
-<p id="section-12-20">After having received a set of certificates, the client checks their
-validity based on the current date, filters out the ones designed for
-encryption systems that are not supported by the client, and chooses
-the certificate with the higher serial number.<a href="#section-12-20" class="pilcrow">¶</a></p>
-<p id="section-12-21">DNSCrypt queries sent by the client must use the <code>&lt;client-magic&gt;</code>
-header of the chosen certificate, as well as the specified encryption
+<p id="section-12-20">After having received a set of certificates, the client checks their validity based on the current date, filters out the ones designed for encryption systems that are not supported by the client, and chooses the certificate with the higher serial number.<a href="#section-12-20" class="pilcrow">¶</a></p>
+<p id="section-12-21">DNSCrypt queries sent by the client must use the <code>&lt;client-magic&gt;</code> header of the chosen certificate, as well as the specified encryption
 system and public key.<a href="#section-12-21" class="pilcrow">¶</a></p>
-<p id="section-12-22">The client must check for new certificates every hour, and switch to a
-new certificate if:<a href="#section-12-22" class="pilcrow">¶</a></p>
+<p id="section-12-22">The client must check for new certificates every hour, and switch to a new certificate if:<a href="#section-12-22" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-12-23.1">the current certificate is not present or not valid any more<a href="#section-12-23.1" class="pilcrow">¶</a>
 </li>
       </ul>
 <p id="section-12-24">or<a href="#section-12-24" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-12-25.1">a certificate with a higher serial number than the current one is
-available.<a href="#section-12-25.1" class="pilcrow">¶</a>
+<li class="normal" id="section-12-25.1">a certificate with a higher serial number than the current one is available.<a href="#section-12-25.1" class="pilcrow">¶</a>
 </li>
       </ul>
 </section>
@@ -1584,32 +1546,17 @@ available.<a href="#section-12-25.1" class="pilcrow">¶</a>
       <h2 id="name-operational-considerations">
 <a href="#section-14" class="section-number selfRef">14. </a><a href="#name-operational-considerations" class="section-name selfRef">Operational considerations</a>
       </h2>
-<p id="section-14-1">Special attention should be paid to the uniqueness of the generated
-secret keys.<a href="#section-14-1" class="pilcrow">¶</a></p>
-<p id="section-14-2">Client public keys can be used by resolvers to authenticate clients,
-link queries to customer accounts, and unlock business-specific
+<p id="section-14-1">Special attention should be paid to the uniqueness of the generated secret keys.<a href="#section-14-1" class="pilcrow">¶</a></p>
+<p id="section-14-2">Client public keys can be used by resolvers to authenticate clients, link queries to customer accounts, and unlock business-specific
 features such as redirecting specific domain names to a sinkhole.<a href="#section-14-2" class="pilcrow">¶</a></p>
-<p id="section-14-3">Resolvers accessible from any client IP address can also opt for only
-responding to a set of whitelisted public keys.<a href="#section-14-3" class="pilcrow">¶</a></p>
-<p id="section-14-4">Resolvers accepting queries from any client must accept any client
-public key. In particular, an anonymous client can generate a new key pair
-for every session, or even for every query. This mitigates the ability
-for a resolver to group queries by client public keys, and discover
-the set of IP addresses a user might have been operating.<a href="#section-14-4" class="pilcrow">¶</a></p>
-<p id="section-14-5">Resolvers must rotate the short-term key pair every 24 hours at most, and
-must throw away the previous secret key.<a href="#section-14-5" class="pilcrow">¶</a></p>
-<p id="section-14-6">During a key rotation, and provided that the old key hasn't been
-compromised, a resolver should accept both the old and the new key for at
-least 4 hours, and public them as different certificates.<a href="#section-14-6" class="pilcrow">¶</a></p>
-<p id="section-14-7">Provider public keys may be published as a DNSSEC-signed TXT records,
-in the same zone as the provider name.<a href="#section-14-7" class="pilcrow">¶</a></p>
-<p id="section-14-8">For example, a query for the TXT type on the name <code>"2.pubkey.example.com"</code>
-may return a signed record containing a hexadecimal-encoded provider
-public key for the provider name <code>"2.dnscrypt-cert.example.com"</code>.<a href="#section-14-8" class="pilcrow">¶</a></p>
-<p id="section-14-9">As a client is likely to reuse the same key pair many times, servers are
-encouraged to cache shared keys instead of performing the X25519
-operation for each query. This makes the computational overhead of
-DNSCrypt negligible compared to plain DNS.<a href="#section-14-9" class="pilcrow">¶</a></p>
+<p id="section-14-3">Resolvers accessible from any client IP address can also opt for only responding to a set of whitelisted public keys.<a href="#section-14-3" class="pilcrow">¶</a></p>
+<p id="section-14-4">Resolvers accepting queries from any client must accept any client public key. In particular, an anonymous client can generate a new key pair for every session, or even for every query.<a href="#section-14-4" class="pilcrow">¶</a></p>
+<p id="section-14-5">his mitigates the ability for a resolver to group queries by client public keys, and discover the set of IP addresses a user might have been operating.<a href="#section-14-5" class="pilcrow">¶</a></p>
+<p id="section-14-6">Resolvers must rotate the short-term key pair every 24 hours at most, and must throw away the previous secret key.<a href="#section-14-6" class="pilcrow">¶</a></p>
+<p id="section-14-7">During a key rotation, and provided that the old key hasn't been compromised, a resolver should accept all valid keys for at least 4 hours, and handle them as different certificates.<a href="#section-14-7" class="pilcrow">¶</a></p>
+<p id="section-14-8">Provider public keys may be published as a DNSSEC-signed TXT records, in the same zone as the provider name.<a href="#section-14-8" class="pilcrow">¶</a></p>
+<p id="section-14-9">For example, a query for the TXT type on the name <code>"2.pubkey.example.com"</code> may return a signed record containing a hexadecimal-encoded provider public key for the provider name <code>"2.dnscrypt-cert.example.com"</code>.<a href="#section-14-9" class="pilcrow">¶</a></p>
+<p id="section-14-10">As a client is likely to reuse the same key pair many times, servers are encouraged to cache shared keys instead of performing the X25519 operation for each query. This makes the computational overhead of DNSCrypt negligible compared to plain DNS.<a href="#section-14-10" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
